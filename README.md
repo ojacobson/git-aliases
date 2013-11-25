@@ -27,6 +27,10 @@
 * You sometimes want to use normal Git commands, too. (Otherwise, why aren't
   you using `git-flow`, `tig`, or some other workflow frontend?)
 
+# Usage:
+
+Read the inline comments in [aliases.gitconfig](aliases.gitconfig).
+
 # Installation:
 
     $ git config --global --add include.path '/path/to/aliases.gitconfig'
