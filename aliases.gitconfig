@@ -1,0 +1,77 @@
+[alias]
+	## Alias management
+	# List aliases: `git aliases`
+	aliases	= config --global --get-regexp alias[.]
+
+	## Remote management
+	# Bring all remotes up to date: `git fall` (this is morally
+	# equivalent to `git remote update --prune`, but easier to type).
+	fall	= fetch --all --prune
+	# Bring this branch up to date with its upstream, safely: `git up`
+	# This will fail (intentionally) if the current branch has diverged
+	# from upstream; use `git reset`, `git rebase`, or `git merge` to
+	# re-converge the branch as appropriate. I generally only use this to
+	# bring local `master` up to date with `origin/master` immediately
+	# before using `git accept`.
+	up	= pull --ff --ff-only
+	# Fast-forward the current branch: `git ff [BRANCHNAME]`. Morally
+	# equivalent to `git up` if you fetch things by hand and have
+	# `merge.defaultToUpstream` set to `true` (which you should).)
+	ff	= merge --ff --ff-only
+	# Configure `origin` to fetch Github pull requests: `git prhub` - this
+	# will cause `git fetch` to create local refs named `refs/pull/N` for
+	# each pull request's source branch.
+	prhub = config --add remote.origin.fetch +refs/pull/*/head:refs/pull/*
+	# Configure `origin` to fetch Stash pull requests: `git prstash`
+	# Atlassian is very insistent that these refs are for internal use
+	# only and are unsupported; they've changed how they work at least
+	# once in recent history. If this breaks, you get to keep both pieces.
+	prstash = config --add remote.origin.fetch +refs/pull-requests/*/from:refs/pull/*
+
+	## Branch lifecycle
+	# Create a branch: `git newbranch BRANCHNAME` (protip: run `git fall`
+	# first.) The new branch will track origin/master by default.
+	# Tracking info gets used below.
+	newbranch	= checkout --track origin/master -b
+	# Branch log for the current branch: `git blog [log options]`
+	blog	= log HEAD@{upstream}..HEAD
+	# Aggregate diff of the current branch: `git bdiff [diff options]`
+	bdiff	= diff HEAD@{upstream} HEAD
+	# Upload a branch to personal fork: `git publish` - note that this
+	# will unconditionally overwrite the branch if it already exists,
+	# potentially "losing" changes. Don't `git publish` master. Because of
+	# limitations in git's aliases mechanism, this DOES NOT support `git
+	# publish BRANCHNAME` the way you'd expect.
+	publish	= !git push "${USER}" +HEAD
+	# "Accept" a branch by merging it: `git accept BRANCHNAME` - this
+	# always creates a merge commit if it succeeds, making it easier to
+	# pick out branch merges in history. (See `git up`, above, for more
+	# usage advice.)
+	accept	= merge --no-ff
+	# Rewrite the current branch, in place: `git rewrite` - unlike `git
+	# rebase`, this does _not_ advance the branch onto new upstream
+	# changes. You can use this to clean up branch history without
+	# worrying about conflicts with others' changes at the same time.
+	rewrite = rebase --interactive --onto HEAD...@{upstream}
+	# Create a branch detached from history: `git sever BRANCHNAME` - this
+	# is a bit of a niche command; I create expurgated branches from
+	# private projects more often than some people.
+	sever	= checkout --detach
+
+	## Commit authoring
+	## The following aliases interact with `git rebase --autosquash`; I
+	## recommend setting `rebase.autosquash` to `true` to make this the
+	## default behaviour. See `man git-rebase` for a thorough explanation.
+	# Stage the work tree, verbatim, including removals and renames: `git
+	# this` - try to keep `git status` clean all the time, or this will
+	# make you so, so sad. `.git/info/exclude` is a great help for this.
+	this	= add --all
+	# Replace the most recent commit: `git amend [commit options]`.
+	amend	= commit --amend
+	# Retrofit changes onto an old commit during the next rebase/rewrite:
+	# `git fixup COMMITISH` (for example, `git fixup HEAD`).
+	fixup	= commit --fixup
+
+	## Working with history
+	# Simple text-based commit graph: `git lol [BRANCHES|--all]`
+	lol	= log --graph --oneline --decorate
