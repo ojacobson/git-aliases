@@ -67,7 +67,7 @@
 	# make you so, so sad. `.git/info/exclude` is a great help for this.
 	this	= add --all
 	# Replace the most recent commit: `git amend [commit options]`.
-	amend	= commit --amend
+	amend	= commit --amend --no-edit
 	# Retrofit changes onto an old commit during the next rebase/rewrite:
 	# `git fixup COMMITISH` (for example, `git fixup HEAD`).
 	fixup	= commit --fixup
