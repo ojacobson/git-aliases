@@ -29,10 +29,10 @@
 	prstash = config --add remote.origin.fetch +refs/pull-requests/*/from:refs/pull/*
 
 	## Branch lifecycle
-	# Create a branch: `git newbranch BRANCHNAME` (protip: run `git fall`
+	# Create a branch: `git start BRANCHNAME` (protip: run `git fall`
 	# first.) The new branch will track origin/master by default.
 	# Tracking info gets used below.
-	newbranch	= checkout --track origin/master -b
+	start	= checkout --track origin/master -b
 	# Branch log for the current branch: `git blog [log options]`
 	blog	= log HEAD@{upstream}..HEAD
 	# Aggregate diff of the current branch: `git bdiff [diff options]`
