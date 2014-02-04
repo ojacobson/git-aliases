@@ -65,7 +65,10 @@
 	# Stage the work tree, verbatim, including removals and renames: `git
 	# this` - try to keep `git status` clean all the time, or this will
 	# make you so, so sad. `.git/info/exclude` is a great help for this.
-	this	= add --all
+	this	= add --all :/
+	# Stage this subdirectory of the work tree, verbatim, including
+	# removals and renames: `git these`.
+	these	= add --all .
 	# Replace the most recent commit: `git amend [commit options]`.
 	amend	= commit --amend --no-edit
 	# Retrofit changes onto an old commit during the next rebase/rewrite:
