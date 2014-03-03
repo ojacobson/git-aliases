@@ -38,7 +38,7 @@
     # Branch one-line summary (equivalent to `git blog --oneline`)
     bsummary    = log --oneline HEAD@{upstream}..HEAD
 	# Aggregate diff of the current branch: `git bdiff [diff options]`
-	bdiff	= diff HEAD@{upstream} HEAD
+	bdiff	= diff HEAD@{upstream}...HEAD
 	# Upload a branch to personal fork: `git publish` - note that this
 	# will unconditionally overwrite the branch if it already exists,
 	# potentially "losing" changes. Don't `git publish` master. Because of
