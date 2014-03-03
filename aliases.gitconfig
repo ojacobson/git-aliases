@@ -21,12 +21,12 @@
 	# Configure `origin` to fetch Github pull requests: `git prhub` - this
 	# will cause `git fetch` to create local refs named `refs/pull/N` for
 	# each pull request's source branch.
-	prhub = config --add remote.origin.fetch +refs/pull/*/head:refs/pull/*
+	prhub	= config --add remote.origin.fetch +refs/pull/*/head:refs/pull/*
 	# Configure `origin` to fetch Stash pull requests: `git prstash`
 	# Atlassian is very insistent that these refs are for internal use
 	# only and are unsupported; they've changed how they work at least
 	# once in recent history. If this breaks, you get to keep both pieces.
-	prstash = config --add remote.origin.fetch +refs/pull-requests/*/from:refs/pull/*
+	prstash	= config --add remote.origin.fetch +refs/pull-requests/*/from:refs/pull/*
 
 	## Branch lifecycle
 	# Create a branch: `git start BRANCHNAME` (protip: run `git fall`
@@ -35,8 +35,8 @@
 	start	= checkout --track origin/master -b
 	# Branch log for the current branch: `git blog [log options]`
 	blog	= log HEAD@{upstream}..HEAD
-    # Branch one-line summary (equivalent to `git blog --oneline`)
-    bsummary    = log --oneline HEAD@{upstream}..HEAD
+	# Branch one-line summary (equivalent to `git blog --oneline`)
+	bsummary	= log --oneline HEAD@{upstream}..HEAD
 	# Aggregate diff of the current branch: `git bdiff [diff options]`
 	bdiff	= diff HEAD@{upstream} HEAD
 	# Upload a branch to personal fork: `git publish` - note that this
@@ -54,7 +54,7 @@
 	# rebase`, this does _not_ advance the branch onto new upstream
 	# changes. You can use this to clean up branch history without
 	# worrying about conflicts with others' changes at the same time.
-	rewrite = rebase --interactive --onto HEAD...@{upstream}
+	rewrite	= rebase --interactive --onto HEAD...@{upstream}
 	# Create a branch detached from history: `git sever BRANCHNAME` - this
 	# is a bit of a niche command; I create expurgated branches from
 	# private projects more often than some people.
