@@ -35,6 +35,8 @@
 	start	= checkout --track origin/master -b
 	# Branch log for the current branch: `git blog [log options]`
 	blog	= log HEAD@{upstream}..HEAD
+    # Branch one-line summary (equivalent to `git blog --oneline`)
+    bsummary    = log --oneline HEAD@{upstream}..HEAD
 	# Aggregate diff of the current branch: `git bdiff [diff options]`
 	bdiff	= diff HEAD@{upstream} HEAD
 	# Upload a branch to personal fork: `git publish` - note that this
