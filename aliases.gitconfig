@@ -59,6 +59,8 @@
 	# is a bit of a niche command; I create expurgated branches from
 	# private projects more often than some people.
 	sever	= checkout --detach
+  # Delete all branches merged into origin/maser: `git prune-merged`
+	prune-merged = "!f() { git for-each-ref refs/heads/* --merged | while read hash type ref; do branch=\"$(git rev-parse --abbrev-ref \"${ref}\")\"; git branch -d \"${branch}\"; done; }; f"
 
 	## Commit authoring
 	## The following aliases interact with `git rebase --autosquash`; I
@@ -76,6 +78,12 @@
 	# Retrofit changes onto an old commit during the next rebase/rewrite:
 	# `git fixup COMMITISH` (for example, `git fixup HEAD`).
 	fixup	= commit --fixup
+  # Retrofit changes onto an old commit during the next rebase/rewrite,
+  # adding an additional comment `git squash COMMITISH` (for example,
+  # `git squash HEAD`).
+  squash = commit --squash
+  # Create a meaningless commit with a unique message: `git wip`.
+	wip = "!f() { git this && git commit -m \"wip: $(uuidgen)\"; }; f"
 
 	## Working with history
 	# Simple text-based commit graph: `git lol [BRANCHES|--all]`
