@@ -29,10 +29,6 @@
 	prstash	= config --add remote.origin.fetch +refs/pull-requests/*/from:refs/pull/*
 
 	## Branch lifecycle
-	# Create a branch: `git start BRANCHNAME` (protip: run `git fall`
-	# first.) The new branch will track origin/master by default.
-	# Tracking info gets used below.
-	start	= checkout --track origin/master -b
 	# Branch log for the current branch: `git blog [log options]`
 	blog	= log HEAD@{upstream}..HEAD
 	# Branch one-line summary (equivalent to `git blog --oneline`)
@@ -41,8 +37,8 @@
 	bdiff	= diff HEAD@{upstream}...HEAD
 	# Upload a branch to personal fork: `git publish` - note that this
 	# will unconditionally overwrite the branch if it already exists,
-	# potentially "losing" changes. Don't `git publish` master. Because of
-	# limitations in git's aliases mechanism, this DOES NOT support `git
+	# potentially "losing" changes. Don't `git publish` main or master. Because
+   # of limitations in git's aliases mechanism, this DOES NOT support `git
 	# publish BRANCHNAME` the way you'd expect.
 	publish	= !git push "${USER}" +HEAD
 	# "Accept" a branch by merging it: `git accept BRANCHNAME` - this

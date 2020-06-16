@@ -1,0 +1,13 @@
+#!/bin/bash -e
+
+# Create a branch: `git start BRANCHNAME` (protip: run `git fall` first.) The
+# new branch will track origin/main by default, or origin/master if origin/main
+# doesn't exist. Tracking info gets used below.
+
+if git rev-parse --quiet --verify origin/main > /dev/null; then
+  exec git checkout --track origin/main -b "$@"
+elif git rev-parse --quiet --verify origin/master > /dev/null; then
+  exec git checkout --track origin/master -b "$@"
+fi
+
+exec git checkout --track origin/main -b "$@"
