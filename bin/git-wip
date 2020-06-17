@@ -3,4 +3,4 @@
 # Create a meaningless commit with a unique message: `git wip`.
 
 git this
-git commit -m "wip: $(uuidgen)"
+git commit --no-verify -m "wip: $(uuidgen)"
