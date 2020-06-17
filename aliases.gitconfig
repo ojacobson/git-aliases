@@ -35,12 +35,6 @@
 	bsummary	= log --oneline HEAD@{upstream}..HEAD
 	# Aggregate diff of the current branch: `git bdiff [diff options]`
 	bdiff	= diff HEAD@{upstream}...HEAD
-	# Upload a branch to personal fork: `git publish` - note that this
-	# will unconditionally overwrite the branch if it already exists,
-	# potentially "losing" changes. Don't `git publish` main or master. Because
-   # of limitations in git's aliases mechanism, this DOES NOT support `git
-	# publish BRANCHNAME` the way you'd expect.
-	publish	= !git push "${USER}" +HEAD
 	# "Accept" a branch by merging it: `git accept BRANCHNAME` - this
 	# always creates a merge commit if it succeeds, making it easier to
 	# pick out branch merges in history. (See `git up`, above, for more
@@ -78,8 +72,6 @@
   # adding an additional comment `git squash COMMITISH` (for example,
   # `git squash HEAD`).
   squash = commit --squash
-  # Create a meaningless commit with a unique message: `git wip`.
-	wip = "!f() { git this && git commit -m \"wip: $(uuidgen)\"; }; f"
 
 	## Working with history
 	# Simple text-based commit graph: `git lol [BRANCHES|--all]`

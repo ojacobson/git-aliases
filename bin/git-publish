@@ -1,0 +1,10 @@
+#!/bin/bash -e
+
+# Copy your current branch to a "publishing" remote.
+#
+# By default, this remote is the remote matching your local username. However,
+# you can set `publish.remote` to publish to another repository (eg. origin).
+
+REMOTE="$(git config publish.remote || echo "${USER}")"
+
+exec git push --force-with-lease "$@" "${REMOTE}" HEAD
